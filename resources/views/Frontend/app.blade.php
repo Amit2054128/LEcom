@@ -8,6 +8,7 @@
   </head>
   <body>
 
+
     @include('Frontend.components.Nav')
 
     @yield('frontend')
