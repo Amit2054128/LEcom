@@ -7,18 +7,21 @@
       <div class="collapse navbar-collapse " id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
+            <a class="nav-link" href="{{route('frontend.product')}}">Products</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
+            <a class="nav-link" href="{{route('frontend.category')}}">Category</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
+            <a class="nav-link" href="#">Cart <span class="badge bg-danger">0</span></a>
           </li>
         </ul>
+        <div class="float-left">
+           <a href="{{route('login')}}"> <button class=" btn btn-info">Login</button></a>
+        </div>
       </div>
     </div>
   </nav>

@@ -5,7 +5,10 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\PageController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SettingController;
+use App\Http\Controllers\Frontend\CategoryController as FrontendCategoryController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\ProductsController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +23,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',[FrontendController::class,'home'])->name('home');
+Route::get('/products',[ProductsController::class,'products'])->name('frontend.product');
+Route::get('/category/{id}',[ProductsController::class,'categoryProduct'])->name('product.category');
+Route::get('/categries',[FrontendCategoryController::class,'category'])->name('frontend.category');
+
+
+
 
 
 Route::prefix('dashboard')->group(function(){
@@ -62,5 +71,11 @@ Route::prefix('dashboard')->group(function(){
     Route::get('/product/create',[ProductController::class,'create'])->name('product.create');
     Route::post('/product/create',[ProductController::class,'store'])->name('product.store');
     Route::get('product/show/{id}',[ProductController::class,'productShow'])->name('product.show');
+    Route::get('/featured-active/{id}',[ProductController::class,'activeFeatured'])->name('featured.active');
+    Route::get('/featured-deactive/{id}',[ProductController::class,'deActiveFeatured'])->name('featured.deactive');
 });
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

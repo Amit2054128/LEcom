@@ -55,7 +55,7 @@
 
                                     @endif
                                 </td>
-                                <td><img src="https://www.cgdigital.com.np/api/images/products/9njGTG_1666002913-2.png"
+                                <td><img src="{{asset($products->product_image)}}" style="object-fit: contain"
                                         height="50px" width="50px" alt=""></td>
                                 <td>10 %</td>
                                 <td>100000</td>

@@ -51,7 +51,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $categories->category_name }}</h5>
                                     {{-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> --}}
-                                    <a href="#" class="btn btn-primary">View Products</a>
+                                    <a href="" class="btn btn-primary">View Products</a>
                                 </div>
                             </div>
 
@@ -115,7 +115,11 @@
                                 </div>
                                 {{-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                                     the card's content.</p> --}}
-                                <a href="#" class="btn btn-primary">Add to cart</a>
+                                @if(Auth::check())
+                                <a href="{{route('frontend.product')}}" class="btn btn-primary">Add to cart</a>
+                                @else
+                                <a href="{{route('login')}}" class="btn btn-primary">Add to cart</a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -138,33 +142,41 @@
                 <h2>Featured Products</h2>
             </div>
 
-            <div>
+            <div class="row">
+
+                @foreach ($featuredProducts as $products )
                 <div class="col-md-3">
-                    <div class="card shadow py-2" style="width: 18rem;">
-                        <img src="..."
-                           class="card-img-top" alt="...">
+                    <div class="card shadow" style="width: 18rem;">
+                        <img src="{{asset($products->product_image)}}" height="200px" style="object-fit: contain" class="card-img-top py-2" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <h5 class="card-title">{{$products->product_name}}</h5>
 
+                            <div>
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <del>
+                                            Rs.{{$products->price}}
+                                        </del>
+                                    </div>
+                                    <div class="text-danger">
+                                        {{$products->discount}} %
+                                    </div>
 
-                            <a href="#" class="btn btn-primary mx-auto">Go somewhere</a>
+                                </div>
+                                <div>
+                                    Rs.{{$products->selling_price}}
+                                </div>
+
+                            </div>
+                            {{-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                                the card's content.</p> --}}
+                            <a href="#" class="btn btn-primary">Add to cart</a>
                         </div>
                     </div>
-                    <div class="card shadow py-2" style="width: 18rem;">
-                        <img src="..."
-                           class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-
-
-                            <a href="#" class="btn btn-primary mx-auto">Go somewhere</a>
-                        </div>
-                    </div>
-
-
                 </div>
+                @endforeach
+
+
 
             </div>
 

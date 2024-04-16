@@ -66,7 +66,11 @@
                                 </div>
                                 <div class="d-flex my-4">
                                     <span>Featured Status:</span>
-                                   <a href="" class="px-2" onclick="return confirm('Are you sure want to enable {{$product->product_name}}')"><button class="badge bg-danger" ><b>{{$product->is_featured}}</b></button></a>
+                                    @if($product->is_featured == 'active')
+                                    <a href="{{route('featured.deactive',$product->id)}}" class="px-2" onclick="return confirm('Are you sure want to disable {{$product->product_name}}')"><button class="badge bg-success" ><b>Active</b></button></a>
+                                   @else
+                                   <a href="{{route('featured.active',$product->id)}}" class="px-2" onclick="return confirm('Are you sure want to enable {{$product->product_name}}')"><button class="badge bg-danger" ><b>Deactive</b></button></a>
+                                   @endif
                                 </div>
                                 <div class="d-flex my-4">
                                     <span>Active Status:</span>

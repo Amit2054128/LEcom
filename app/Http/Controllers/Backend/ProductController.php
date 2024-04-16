@@ -46,4 +46,24 @@ class ProductController extends Controller
         $product = Product::findOrfail($id);
         return view('Backend.Page.Product.Show',compact( 'product' ));
     }
+
+public function activeFeatured($id){
+    $deactiveFeatured = Product::findOrFail($id);
+    $productName = $deactiveFeatured->product_name;
+    $deactiveFeatured->is_featured = 'active';
+    $deactiveFeatured->save();
+    toast($productName . 'is Activated','success');
+    return redirect()->back();
+
+}
+
+public function deActiveFeatured($id){
+    $deactiveFeatured = Product::findOrFail($id);
+    $productName = $deactiveFeatured->product_name;
+    $deactiveFeatured->is_featured = 'deactive';
+    $deactiveFeatured->save();
+    toast($productName . 'is Deactivated','success');
+    return redirect()->back();
+
+}
 }
