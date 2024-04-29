@@ -20,4 +20,9 @@ public function home(){
     $featuredProducts = Product::where('is_featured','active')->latest()->take(4)->get();
     return view('Frontend.Page.Home.Home',compact('carousel','settingColor','category','product','featuredProducts'));
 }
+
+public function logout(){
+    Auth::logout();
+    return redirect()->route('home');
+}
 }

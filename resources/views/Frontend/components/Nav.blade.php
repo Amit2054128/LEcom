@@ -20,8 +20,17 @@
           </li>
         </ul>
         <div class="float-left">
+        @if(Auth::check())
+           <a>{{Auth::user()->name}}</a>
+           @else
            <a href="{{route('login')}}"> <button class=" btn btn-info">Login</button></a>
+           @endif
         </div>
+        @if(Auth::check())
+        <div class="mx-3">
+            <a href="{{route('logouts')}}"><button class="btn btn-danger">Logout</button></a>
+        </div>
+        @endif
       </div>
     </div>
   </nav>

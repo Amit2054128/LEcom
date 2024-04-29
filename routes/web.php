@@ -26,13 +26,15 @@ Route::get('/',[FrontendController::class,'home'])->name('home');
 Route::get('/products',[ProductsController::class,'products'])->name('frontend.product');
 Route::get('/category/{id}',[ProductsController::class,'categoryProduct'])->name('product.category');
 Route::get('/categries',[FrontendCategoryController::class,'category'])->name('frontend.category');
+Route::get('/logouts',[FrontendController::class,'logout'])->name('logouts');
 
 
 
 
 
 Route::prefix('dashboard')->group(function(){
-    Route::get('home',[PageController::class,'dashboard'])->name('dashboard');
+    Route::middleware(['checkRole','auth'])->group(function(){
+    Route::get('/home',[PageController::class,'dashboard'])->name('dashboard');
     // CAROUSELS ROUTE START
     Route::get('carousel',[CarouselController::class,'carousel'])->name('carousel.index');
     Route::get('carousel/create',[CarouselController::class,'carouselCreate'])->name('carousel.create');
@@ -73,9 +75,12 @@ Route::prefix('dashboard')->group(function(){
     Route::get('product/show/{id}',[ProductController::class,'productShow'])->name('product.show');
     Route::get('/featured-active/{id}',[ProductController::class,'activeFeatured'])->name('featured.active');
     Route::get('/featured-deactive/{id}',[ProductController::class,'deActiveFeatured'])->name('featured.deactive');
+
+    });
+
 });
 
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
